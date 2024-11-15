@@ -8,9 +8,11 @@ int main(void)
     //Memory leak
     person = new std::string("Karl");
 
-    std::cout << "Hello World " << person << std::endl;
+    std::cout << "Hello World " << *person << std::endl;
     
     std::cout << "Goodbye World!" << std::endl;
-
+    
+    delete person;
+    
     return 0;
 }
