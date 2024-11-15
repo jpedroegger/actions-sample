@@ -19,22 +19,11 @@ jobs:
         sudo apt update
         sudo apt install -y clang valgrind
 
-    - name: Configure Build directory
+    - name: Compile and run the program
       run: |
-        mkdir -p build
-
-    - name: Compile the program
-      run: |
-        cd build
         clang++ -o hello main.cpp
-
-    - name: Run the Program
-      run: |
-        cd build
         ./hello
 
     - name: Run Valgrind for leak check
-      run: |
-        cd build
-        valgrind --lelak-check=full ./hello
+      run: valgrind --leak-check=full ./hello
     
