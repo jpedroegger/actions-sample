@@ -1,0 +1,42 @@
+name: C++ CI
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout Code
+      uses: actions/checkout@v2
+
+    - name: Install dependencies
+      run: |
+        sudo apt update
+        sudo apt install -y cmake clang++ valgrind
+
+    - name: Configure Build directory
+      run: |
+        mkdir -p build
+        cd build
+        cmake ..
+
+    - name: Compile the program
+      run: |
+        cd build
+        clang++ -o hello main.cpp
+
+    - name: Run the Program
+      run: |
+        cd build
+        ./hello
+
+    - name: Run Valgrind for leak check
+      run: |
+        cd build
+        valgrind --lelak-check=full ./hello
+    
