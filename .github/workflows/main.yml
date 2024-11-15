@@ -26,5 +26,5 @@ jobs:
         ./hello
 
     - name: Run Valgrind for leak check
-      run: valgrind --leak-check=full ./hello
+      run: valgrind --leak-check=full --error-exitcode=1 ./hello
     
